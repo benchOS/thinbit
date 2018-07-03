@@ -1,0 +1,20 @@
+{
+  "name": "@benos/thinbit",
+  "version": "0.1.1",
+  "description": "benOS library for bit fields, that allocates a series of tiny buffs to support thinning bits without setting aside a massive buffer to do so.",
+  "main": "index.js",
+  "dependencies": {
+    "@benos/benpager": "*"
+  },
+  "devDependencies": {
+    "buffer-alloc": "^1.1.0",
+    "standard": "^9.0.0",
+    "tape": "^4.6.3"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
