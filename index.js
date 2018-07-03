@@ -1,15 +1,15 @@
-var memoryPager = require('@benos/benpager')
+var BenPager = require('@benos/benbenPager')
 
-module.exports = Thinbit
+module.exports = ThinBit
 
-function Thinbit (opts) {
-  if (!(this instanceof Thinbit)) return new Thinbit(opts)
+function ThinBit (opts) {
+  if (!(this instanceof ThinBit)) return new ThinBit(opts)
   if (!opts) opts = {}
   if (Buffer.isBuffer(opts)) opts = {buffer: opts}
 
   this.pageOffset = opts.pageOffset || 0
   this.pageSize = opts.pageSize || 1024
-  this.pages = opts.pages || memoryPager(this.pageSize)
+  this.pages = opts.pages || BenPager(this.pageSize)
 
   this.byteLength = this.pages.length * this.pageSize
   this.length = 8 * this.byteLength
@@ -28,14 +28,14 @@ function Thinbit (opts) {
   }
 }
 
-Thinbit.prototype.get = function (i) {
+ThinBit.prototype.get = function (i) {
   var o = i & 7
   var j = (i - o) / 8
 
   return !!(this.getByte(j) & (128 >> o))
 }
 
-Thinbit.prototype.getByte = function (i) {
+ThinBit.prototype.getByte = function (i) {
   var o = i & this._pageMask
   var j = (i - o) / this.pageSize
   var page = this.pages.get(j, true)
@@ -43,7 +43,7 @@ Thinbit.prototype.getByte = function (i) {
   return page ? page.buffer[o + this.pageOffset] : 0
 }
 
-Thinbit.prototype.set = function (i, v) {
+ThinBit.prototype.set = function (i, v) {
   var o = i & 7
   var j = (i - o) / 8
   var b = this.getByte(j)
@@ -51,7 +51,7 @@ Thinbit.prototype.set = function (i, v) {
   return this.setByte(j, v ? b | (128 >> o) : b & (255 ^ (128 >> o)))
 }
 
-Thinbit.prototype.toBuffer = function () {
+ThinBit.prototype.toBuffer = function () {
   var all = alloc(this.pages.length * this.pageSize)
 
   for (var i = 0; i < this.pages.length; i++) {
@@ -63,7 +63,7 @@ Thinbit.prototype.toBuffer = function () {
   return all
 }
 
-Thinbit.prototype.setByte = function (i, b) {
+ThinBit.prototype.setByte = function (i, b) {
   var o = i & this._pageMask
   var j = (i - o) / this.pageSize
   var page = this.pages.get(j, false)
