@@ -1,4 +1,4 @@
-var BenPager = require('@benos/benbenPager')
+var BenPager = require('@benos/benpager')
 
 module.exports = ThinBit
 
