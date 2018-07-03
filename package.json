@@ -1,6 +1,6 @@
 {
   "name": "@benos/thinbit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "benOS library for bit fields, that allocates a series of tiny buffs to support thinning bits without setting aside a massive buffer to do so.",
   "main": "index.js",
   "dependencies": {
